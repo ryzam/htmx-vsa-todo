@@ -3,3 +3,4 @@
 - FastEndpoints
 - HTMX
 - PostgreSQL
+- Vertical Slice Architecture
