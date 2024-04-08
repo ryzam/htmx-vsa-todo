@@ -1,0 +1,6 @@
+@HtmxTodo.WebApi_HostAddress = http://localhost:5178
+
+GET {{HtmxTodo.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

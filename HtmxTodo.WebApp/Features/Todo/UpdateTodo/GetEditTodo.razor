@@ -1,0 +1,29 @@
+﻿
+@if(Model.completed)
+{
+    <div id="todo-update-@Model.id" style="padding:10px"><input type="checkbox" checked="@Model.completed" id="@Model.id" hx-put="/todo/complete/@Model.id" hx-target="#todo-update-@Model.id" hx-swap="outerHTML" /> <span style="text-decoration:line-through" hx-swap="outerHTML" hx-get="/todo/edit/@Model.id" hx-target="#todo-update-@Model.id" hx-trigger="click">@Model.task</span></div>
+}
+else
+{
+    <div id="div-todo-update-@Model?.id" style="padding:10px;" hx-trigger="otherRowClicked from:body" hx-get="/todo/@Model.id" hx-target="#div-todo-update-@Model?.id" hx-swap="outerHTML">
+        <form hx-put="/todo/edit/@Model?.id" hx-target="#div-todo-update-@Model?.id" hx-swap="outerHTML">
+            <div>
+                <input type="checkbox" id="@Model?.id" /> <input type="text" id="task" name="task" hx-swap="outerHTML" hx-put="/todo/edit/@Model?.id" hx-target="#todo-update-@Model?.id" hx-trigger="click" value="@Model?.task" />
+            </div>
+            <div>
+                <button class="btn btn-danger" hx-get="/todo/@Model?.id">
+                    Cancel
+                </button>
+                <button class="btn btn-danger" type="submit">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public TodoResponse? Model { get; set; }
+}
+

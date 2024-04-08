@@ -1,0 +1,6 @@
+﻿<div id="todo-update-@Model.id" style="padding:10px"><input type="checkbox" id="@Model.id" hx-put="/todo/complete/@Model.id" hx-target="#todo-update-@Model.id" hx-swap="outerHTML" /> <span hx-swap="outerHTML" hx-get="/todo/edit/@Model.id" hx-target="#todo-update-@Model.id" hx-trigger="dblclick">@Model.task</span></div>
+
+@code {
+    [Parameter]
+    public TodoResponse? Model { get; set; }
+}

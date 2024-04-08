@@ -1,0 +1,33 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Todo";
+}
+
+<div class="artboard phone-1" style="position:center">
+    <div id="error">
+        <span id="error-msg" value=""></span>
+    </div>
+    <div>
+
+        <input id="task" type="text" placeholder="Enter your task..." style="width:100%" name="task" hx-post="/todo" hx-target="#todo-list" hx-swap="afterbegin" hx-triger="keyup[enterKey]" hx-on:htmx:after-request="doSomething()" />
+    
+    </div>
+
+    <div id="todo-list" hx-get="/todo" hx-swap="innerHTML" hx-target="#todo-list" hx-trigger="load" hx-headers='{"ContentType": "text/html"}'>
+
+    </div>
+</div>
+
+<script>
+    window.doSomething = function doSomething()
+    {
+        document.getElementById("task").value = "";
+    }
+
+    document.body.addEventListener('htmx:responseError', function (evt) {
+        console.log(evt.detail);
+        let t = document.getElementById("error-msg");
+        t.innerHTML = evt.detail.xhr.responseText;
+    });
+</script>

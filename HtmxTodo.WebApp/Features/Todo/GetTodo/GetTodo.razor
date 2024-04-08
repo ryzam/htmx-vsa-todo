@@ -1,0 +1,24 @@
+﻿@foreach (var todo in Model)
+{
+   
+
+    @if(todo.completed)
+    {
+        <div id="todo-update-@todo.id" style="padding:10px"><input type="checkbox" checked="@todo.completed" id="@todo.id" hx-put="/todo/complete/@todo.id" hx-target="#todo-update-@todo.id" hx-swap="outerHTML" /> <span style="text-decoration:line-through" hx-swap="outerHTML" hx-get="/todo/edit/@todo.id" hx-target="#todo-update-@todo.id" hx-trigger="click">@todo.task</span></div>
+        
+    }
+    else
+    {
+        <div id="todo-update-@todo.id" style="padding:10px">
+            <input type="checkbox" checked="@todo.completed" id="@todo.id" hx-put="/todo/complete/@todo.id" hx-target="#todo-update-@todo.id" hx-swap="outerHTML" /> 
+            <span hx-swap="outerHTML" hx-get="/todo/edit/@todo.id" hx-target="#todo-update-@todo.id" hx-trigger="click">@todo.task</span>
+        </div>
+        
+    }
+}
+
+
+@code {
+    [Parameter]
+    public List<TodoResponse>? Model { get; set; }
+}
